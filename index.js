@@ -310,6 +310,7 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`)
 }
 
-const { plus100 } = nativeBinding
+const { compileSync, compile } = nativeBinding
 
-module.exports.plus100 = plus100
+module.exports.compileSync = compileSync
+module.exports.compile = compile

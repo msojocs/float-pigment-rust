@@ -10,8 +10,9 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-napi        = "2"
-napi-derive = "2"
+float-pigment-css = { version = "0.5.0" }
+napi        = { version = "3.0.0-alpha.33", features = ["dyn-symbols", "async"] }
+napi-derive = { version = "3.0.0-alpha.29" }
 
 [build-dependencies]
 napi-build = "2"
