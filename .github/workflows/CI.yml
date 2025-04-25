@@ -35,6 +35,11 @@ jobs:
         with:
           node-version: 22
           cache: 'pnpm'
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
 
       - name: Install
         uses: dtolnay/rust-toolchain@stable
@@ -114,6 +119,11 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
       - name: Install
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
@@ -232,6 +242,11 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: pnpm
           architecture: ${{ matrix.settings.architecture }}
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
       - name: Install dependencies
         run: pnpm install
       - name: Download artifacts
@@ -262,6 +277,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
       - name: Install dependencies
         run: pnpm install
       - name: Download artifacts
@@ -292,6 +312,11 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
       - name: Install dependencies
         run: |
           pnpm config set supportedArchitectures.libc "musl"
@@ -426,6 +451,11 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
+      - uses: pnpm/action-setup@v3
+        name: Install pnpm
+        with:
+          version: latest
+          run_install: false
       - name: Install dependencies
         run: pnpm install
       - name: Download all artifacts
