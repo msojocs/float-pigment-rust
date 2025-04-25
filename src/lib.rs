@@ -34,7 +34,7 @@ pub fn compile_sync(cfg: CompileOption) -> CompileResult {
 
     // 处理tag名称前缀
     if !cfg.tag_name_prefix.is_empty() {
-      for (name, _) in &cfg.src {
+      for name in cfg.src.keys() {
         ssr.add_tag_name_prefix(name.as_str(), &cfg.tag_name_prefix);
       }
     }
@@ -56,7 +56,7 @@ pub fn compile_sync(cfg: CompileOption) -> CompileResult {
         },
       );
     }
-    for (name, _) in &cfg.src {
+    for name in cfg.src.keys() {
       if let Some(bincode) = ssr.serialize_bincode(name.as_str()) {
         if let Some(file) = result.files.get_mut(name) {
           file.content = Buffer::from(bincode);
@@ -83,7 +83,7 @@ pub async fn compile(cfg: CompileOption) -> napi::Result<CompileResult> {
 
       // 处理tag名称前缀
       if !cfg.tag_name_prefix.is_empty() {
-        for (name, _) in &cfg.src {
+        for name in cfg.src.keys() {
           ssr.add_tag_name_prefix(name.as_str(), &cfg.tag_name_prefix);
         }
       }
@@ -107,7 +107,7 @@ pub async fn compile(cfg: CompileOption) -> napi::Result<CompileResult> {
       }
 
       // 序列化每个文件
-      for (name, _) in &cfg.src {
+      for name in cfg.src.keys() {
         if let Some(bincode) = ssr.serialize_bincode(name.as_str()) {
           if let Some(file) = result.files.get_mut(name) {
             file.content = Buffer::from(bincode);
