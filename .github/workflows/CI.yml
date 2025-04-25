@@ -34,7 +34,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: 'pnpm'
+          
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
@@ -118,7 +118,6 @@ jobs:
         if: ${{ !matrix.settings.docker }}
         with:
           node-version: 22
-          cache: pnpm
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
@@ -240,7 +239,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: pnpm
           architecture: ${{ matrix.settings.architecture }}
       - uses: pnpm/action-setup@v3
         name: Install pnpm
@@ -276,7 +274,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: pnpm
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
@@ -311,7 +308,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-          cache: pnpm
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
@@ -450,7 +446,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: pnpm
       - uses: pnpm/action-setup@v3
         name: Install pnpm
         with:
