@@ -1,5 +1,5 @@
 [package]
-authors = ["LongYinan <lynweklm@gmail.com>"]
+authors = ["msojocs <jiyecafe@gmail.com>"]
 edition = "2021"
 name    = "napi-float-pigment"
 version = "0.1.0"
@@ -11,11 +11,12 @@ crate-type = ["cdylib"]
 
 [dependencies]
 float-pigment-css = { version = "0.7.0" }
-napi        = { version = "3.0.0-alpha.33", features = ["dyn-symbols", "async"] }
-napi-derive = { version = "3.0.0-alpha.29" }
+napi        = { version = "3.0.0", features = ["async"] }
+napi-derive = { version = "3.0.0" }
 
 [build-dependencies]
 napi-build = "2"
 
 [profile.release]
 lto = true
+strip = "symbols"

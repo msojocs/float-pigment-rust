@@ -1,7 +1,7 @@
 {
-  "name": "@napi-rs/package-template",
+  "name": "float-pigment-rust",
   "version": "1.0.0",
-  "description": "Template project for writing node package with napi-rs",
+  "description": "Float pigment compiler for wechat devtools.",
   "main": "index.js",
   "repository": "git@github.com:napi-rs/package-template.git",
   "license": "MIT",
