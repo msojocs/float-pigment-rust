@@ -59,9 +59,9 @@
   },
   "devDependencies": {
     "@napi-rs/cli": "^3.4.1",
-    "@oxc-node/core": "^0.0.23",
+    "@oxc-node/core": "^0.0.32",
     "@taplo/cli": "^0.7.0",
-    "ava": "^6.2.0",
+    "ava": "^6.4.1",
     "chalk": "^5.4.1",
     "lint-staged": "^15.5.0",
     "npm-run-all2": "^7.0.2",
