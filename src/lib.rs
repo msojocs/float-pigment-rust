@@ -12,6 +12,12 @@ pub struct CompileOption {
   pub src: HashMap<String, Uint8Array>,
 }
 #[napi(object)]
+pub struct CompileSingleOption {
+  pub file_content: Buffer,
+  pub file_name: String,
+  pub output_type: String,
+}
+#[napi(object)]
 pub struct CompileResultItem {
   pub content: Buffer,
   pub warnings: Vec<String>,
@@ -129,4 +135,63 @@ pub async fn compile(cfg: CompileOption) -> napi::Result<CompileResult> {
       format!("Async task error: {}", e),
     )
   })?
+}
+
+#[napi]
+pub async fn compile_single(cfg: CompileSingleOption) -> napi::Result<CompileResultItem> {
+  // 将耗时操作放在线程池中执行
+  napi::tokio::spawn(async move {
+    let output_type = cfg.output_type;
+    let mut result = CompileResultItem {
+      content: Buffer::from(Vec::new()),
+      warnings: Vec::new(),
+    };
+    if output_type == "bincode" {
+      let mut ssr = StyleSheetResource::new();
+      let content = String::from_utf8_lossy(&cfg.file_content).into_owned();
+      let str = content.as_str();
+      let warn = ssr.add_source(&cfg.file_name, str);
+      for w in warn {
+        result.warnings.push(String::from(w.message.as_str()));
+      }
+
+      // 序列化文件
+      if let Some(bincode) = ssr.serialize_bincode(&cfg.file_name) {
+        result.content = Buffer::from(bincode);
+      }
+    }
+    Ok(result)
+  })
+  .await
+  .map_err(|e| {
+    napi::Error::new(
+      napi::Status::GenericFailure,
+      format!("Async task error: {}", e),
+    )
+  })?
+}
+
+#[napi]
+pub fn compile_single_sync(cfg: CompileSingleOption) -> CompileResultItem {
+  // 将耗时操作放在线程池中执行
+  let output_type = cfg.output_type;
+  let mut result = CompileResultItem {
+    content: Buffer::from(Vec::new()),
+    warnings: Vec::new(),
+  };
+  if output_type == "bincode" {
+    let mut ssr = StyleSheetResource::new();
+    let content = String::from_utf8_lossy(&cfg.file_content).into_owned();
+    let str = content.as_str();
+    let warn = ssr.add_source(&cfg.file_name, str);
+    for w in warn {
+      result.warnings.push(String::from(w.message.as_str()));
+    }
+
+    // 序列化文件
+    if let Some(bincode) = ssr.serialize_bincode(&cfg.file_name) {
+      result.content = Buffer::from(bincode);
+    }
+  }
+  result
 }
