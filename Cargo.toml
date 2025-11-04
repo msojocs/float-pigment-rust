@@ -10,7 +10,7 @@ version = "0.1.0"
 crate-type = ["cdylib"]
 
 [dependencies]
-float-pigment-css = { version = "0.5.0" }
+float-pigment-css = { version = "0.7.0" }
 napi        = { version = "3.0.0-alpha.33", features = ["dyn-symbols", "async"] }
 napi-derive = { version = "3.0.0-alpha.29" }
 
