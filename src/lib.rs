@@ -16,6 +16,7 @@ pub struct CompileSingleOption {
   pub file_content: Buffer,
   pub file_name: String,
   pub output_type: String,
+  pub tag_name_prefix: String,
 }
 #[napi(object)]
 pub struct CompileResultItem {
@@ -148,6 +149,9 @@ pub async fn compile_single(cfg: CompileSingleOption) -> napi::Result<CompileRes
     };
     if output_type == "bincode" {
       let mut ssr = StyleSheetResource::new();
+      if !cfg.tag_name_prefix.is_empty() {
+        ssr.add_tag_name_prefix(&cfg.file_name, &cfg.tag_name_prefix);
+      }
       let content = String::from_utf8_lossy(&cfg.file_content).into_owned();
       let str = content.as_str();
       let warn = ssr.add_source(&cfg.file_name, str);
@@ -181,6 +185,9 @@ pub fn compile_single_sync(cfg: CompileSingleOption) -> CompileResultItem {
   };
   if output_type == "bincode" {
     let mut ssr = StyleSheetResource::new();
+    if !cfg.tag_name_prefix.is_empty() {
+      ssr.add_tag_name_prefix(&cfg.file_name, &cfg.tag_name_prefix);
+    }
     let content = String::from_utf8_lossy(&cfg.file_content).into_owned();
     let str = content.as_str();
     let warn = ssr.add_source(&cfg.file_name, str);

@@ -24,6 +24,7 @@ export interface CompileSingleOption {
   fileContent: Buffer
   fileName: string
   outputType: string
+  tagNamePrefix: string
 }
 
 export declare function compileSingleSync(cfg: CompileSingleOption): CompileResultItem
