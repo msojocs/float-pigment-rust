@@ -11,7 +11,7 @@ crate-type = ["cdylib"]
 
 [dependencies]
 float-pigment-css = { version = "0.7.0" }
-napi        = { version = "3.0.0", features = ["async"] }
+napi        = { version = "3.0.0", features = ["dyn-symbols"] }
 napi-derive = { version = "3.0.0" }
 
 [build-dependencies]
