@@ -11,11 +11,11 @@ crate-type = ["cdylib"]
 
 [dependencies]
 float-pigment-css = { version = "0.7.0" }
-napi        = { version = "3.0.0", features = ["async"] }
-napi-derive = { version = "3.0.0" }
+napi        = { version = "3.4.0", features = ["dyn-symbols", "async", "compat-mode"] }
+napi-derive = { version = "3.3.0" }
 
 [build-dependencies]
-napi-build = "2"
+napi-build = "2.2.4"
 
 [profile.release]
 lto = true
